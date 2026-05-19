@@ -91,6 +91,34 @@ systemctl start xvfb.service
 # Esperar a que Xvfb esté listo
 sleep 2
 
+# ========== CONFIGURAR LOGROTATE ==========
+echo "⚙️ Configurando logrotate para el Bot..."
+
+# Asegurar que la herramienta logrotate esté instalada
+apt install -y logrotate
+
+cat > /etc/logrotate.d/betting-bot << 'EOF'
+/var/log/betting-bot.log
+/var/log/betting-bot-error.log
+{
+    rotate 7
+    daily
+    maxsize 100M
+    dateext
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 root root
+    postrotate
+        systemctl reload betting-bot.service > /dev/null 2>&1 || true
+    endscript
+}
+EOF
+
+# Ajustar permisos correctos para el archivo de configuración
+chmod 644 /etc/logrotate.d/betting-bot
+
 echo "=========================================="
 echo "✅ Instalación base completada"
 echo "=========================================="

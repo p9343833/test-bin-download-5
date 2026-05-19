@@ -9,8 +9,8 @@ WorkingDirectory=/root/bot_files/
 ExecStart=/root/bot_files/main  --api-key=${API_KEY} --username=${USERNAME} --password=${PASSWORD} --total-bets=${TOTAL_BETS} --bet-value=${BET_VALUE} --min-bet-value=${MIN_BET_VALUE}
 Restart=on-failure
 RestartSec=5s
-StandardOutput=journal
-StandardError=journal
+StandardOutput=append:/var/log/betting-bot.log
+StandardError=append:/var/log/betting-bot-error.log
 
 [Install]
 WantedBy=multi-user.target
