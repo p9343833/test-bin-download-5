@@ -111,7 +111,7 @@ cat > /etc/logrotate.d/betting-bot << 'EOF'
     notifempty
     create 0640 root root
     postrotate
-        systemctl reload betting-bot.service > /dev/null 2>&1 || true
+        systemctl restart betting-bot.service > /dev/null 2>&1 || true
     endscript
 }
 EOF
