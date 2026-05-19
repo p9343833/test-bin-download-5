@@ -75,7 +75,7 @@ After=network.target
 Before=betting-bot.service
 
 [Service]
-ExecStart=/usr/bin/Xvfb :99 -screen 0 1280x1024x24 -ac +extension GLX +render -noreset
+ExecStart=/usr/bin/Xvfb :99 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset
 Restart=always
 User=root
 
