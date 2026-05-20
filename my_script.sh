@@ -35,7 +35,7 @@ echo "✅ Google Chrome $(google-chrome --version) instalado"
 
 # Instalar Xvfb individualmente para evitar que un error detenga todo
 #echo "Instalando Xvfb y librerías gráficas..."
-#apt install -y xvfb || echo "⚠️ Xvfb instalado con advertencias"
+apt install -y xvfb || echo "⚠️ Xvfb instalado con advertencias"
 
 echo "Instaland librerías gráficas..."
 # ========== INSTALAR LIBRERÍAS GRÁFICAS ==========
@@ -66,30 +66,33 @@ apt install -y \
 # Configurar zona horaria
 timedatectl set-timezone America/Bogota
 
-# ========== CONFIGURAR DISPLAY VIRTUAL ==========
-#echo "Configurando Xvfb como servicio systemd..."
+#========== CONFIGURAR DISPLAY VIRTUAL ==========
+echo "Configurando Xvfb como servicio systemd..."
 
-# cat > /etc/systemd/system/xvfb.service << 'EOF'
-# [Unit]
-# Description=X Virtual Frame Buffer Service
-# After=network.target
-# Before=betting-bot.service
+cat > /etc/systemd/system/xvfb.service << 'EOF'
+[Unit]
+Description=X Virtual Frame Buffer Service
+After=network.target
+Before=betting-bot.service
 
-# User=root
+[Service]
+ExecStart=/usr/bin/Xvfb :99 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset
+Restart=always
+User=root
 
-# [Install]
-# WantedBy=multi-user.target
-# EOF
+[Install]
+WantedBy=multi-user.target
+EOF
 
-# Habilitar e iniciar Xvfb
-# systemctl daemon-reload
-# systemctl enable xvfb.service
-# systemctl start xvfb.service
+#Habilitar e iniciar Xvfb
+systemctl daemon-reload
+systemctl enable xvfb.service
+systemctl start xvfb.service
 
 # Esperar a que Xvfb esté listo
 sleep 2
 
-========== CONFIGURAR LOGROTATE ==========
+#========== CONFIGURAR LOGROTATE ==========
 echo "⚙️ Configurando logrotate para el Bot..."
 
 # Asegurar que la herramienta logrotate esté instalada
