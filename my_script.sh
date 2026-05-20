@@ -33,7 +33,7 @@ fi
 # Verificar instalación
 echo "✅ Google Chrome $(google-chrome --version) instalado"
 
-#sudo apt-get install -y python3-tk python3-dev
+sudo apt-get install -y python3-tk python3-dev
 # Instalar Xvfb individualmente para evitar que un error detenga todo
 #echo "Instalando Xvfb y librerías gráficas..."
 apt install -y xvfb || echo "⚠️ Xvfb instalado con advertencias"
