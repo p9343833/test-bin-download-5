@@ -34,9 +34,10 @@ fi
 echo "✅ Google Chrome $(google-chrome --version) instalado"
 
 # Instalar Xvfb individualmente para evitar que un error detenga todo
-echo "Instalando Xvfb y librerías gráficas..."
-apt install -y xvfb || echo "⚠️ Xvfb instalado con advertencias"
+#echo "Instalando Xvfb y librerías gráficas..."
+#apt install -y xvfb || echo "⚠️ Xvfb instalado con advertencias"
 
+echo "Instaland librerías gráficas..."
 # ========== INSTALAR LIBRERÍAS GRÁFICAS ==========
 apt install -y \
     libxss1 \
@@ -66,27 +67,24 @@ apt install -y \
 timedatectl set-timezone America/Bogota
 
 # ========== CONFIGURAR DISPLAY VIRTUAL ==========
-echo "Configurando Xvfb como servicio systemd..."
+#echo "Configurando Xvfb como servicio systemd..."
 
-cat > /etc/systemd/system/xvfb.service << 'EOF'
-[Unit]
-Description=X Virtual Frame Buffer Service
-After=network.target
-Before=betting-bot.service
+# cat > /etc/systemd/system/xvfb.service << 'EOF'
+# [Unit]
+# Description=X Virtual Frame Buffer Service
+# After=network.target
+# Before=betting-bot.service
 
-[Service]
-ExecStart=/usr/bin/Xvfb :99 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset
-Restart=always
-User=root
+# User=root
 
-[Install]
-WantedBy=multi-user.target
-EOF
+# [Install]
+# WantedBy=multi-user.target
+# EOF
 
 # Habilitar e iniciar Xvfb
-systemctl daemon-reload
-systemctl enable xvfb.service
-systemctl start xvfb.service
+# systemctl daemon-reload
+# systemctl enable xvfb.service
+# systemctl start xvfb.service
 
 # Esperar a que Xvfb esté listo
 sleep 2
@@ -94,7 +92,7 @@ sleep 2
 ========== CONFIGURAR LOGROTATE ==========
 echo "⚙️ Configurando logrotate para el Bot..."
 
-Asegurar que la herramienta logrotate esté instalada
+# Asegurar que la herramienta logrotate esté instalada
 apt install -y logrotate
 
 cat > /etc/logrotate.d/betting-bot << 'EOF'
@@ -116,7 +114,7 @@ cat > /etc/logrotate.d/betting-bot << 'EOF'
 }
 EOF
 
-Ajustar permisos correctos para el archivo de configuración
+#Ajustar permisos correctos para el archivo de configuración
 chmod 644 /etc/logrotate.d/betting-bot
 
 echo "=========================================="

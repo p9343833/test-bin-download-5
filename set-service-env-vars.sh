@@ -37,9 +37,9 @@ done
 mkdir -p /etc/conf.d
 touch /etc/conf.d/betting-bot
 
-echo "DISPLAY=:99" > /etc/conf.d/betting-bot
+#echo "DISPLAY=:99" > /etc/conf.d/betting-bot
 
-echo "API_KEY=$API_KEY" >> /etc/conf.d/betting-bot
+echo "API_KEY=$API_KEY" > /etc/conf.d/betting-bot
 echo "USERNAME=$USERNAME" >> /etc/conf.d/betting-bot
 echo "PASSWORD=$PASSWORD" >> /etc/conf.d/betting-bot
 echo "TOTAL_BETS=$TOTAL_BETS" >> /etc/conf.d/betting-bot
