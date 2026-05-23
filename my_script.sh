@@ -14,8 +14,8 @@ mkdir -p /root/bot_files/storage
 mkdir -p /root/storage
 mkdir -p /root/bot_files/logs
 mkdir -p /root/bot_files/screenshots
-mkdir -p /root/mi_bot/chrome_profile
-chmod -R 777 /root/mi_bot/chrome_profile
+mkdir -p /root/bot_files/chrome_profile
+chmod -R 777 /root/bot_files/chrome_profile
 cd /root/bot_files
 
 # ========== INSTALAR GOOGLE CHROME ==========
